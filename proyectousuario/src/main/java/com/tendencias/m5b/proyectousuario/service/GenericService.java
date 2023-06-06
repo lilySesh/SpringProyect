@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package com.tendencias.m5b.service;
+package com.tendencias.m5b.proyectousuario.service;
 
 import java.io.Serializable;
 import java.util.List;
 
 /**
  *
- * @author 59398
+ * @author lilis
  * @param <T>
  * @param <ID>
  */

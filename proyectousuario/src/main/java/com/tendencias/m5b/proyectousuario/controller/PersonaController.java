@@ -3,10 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.tendencias.m5b.proyectousuario.controller;
-
-
-import com.tendencias.m5b.proyectousuario.model.Usuario;
-import com.tendencias.m5b.proyectousuario.service.UsuarioServiceImpl;
+import com.tendencias.m5b.proyectousuario.model.Persona;
+import com.tendencias.m5b.proyectousuario.service.PersonaServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,36 +23,34 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lilis
  */
 @RestController
-@RequestMapping("/usuario")
-public class UsuarioController {
-
-    @Autowired
-    UsuarioServiceImpl usuarioService;
-
-    @Operation(summary = "Se obtiene la lista de Usuarios")
+@RequestMapping("/persona")
+public class PersonaController {
+    @Autowired(required=true)
+    PersonaServiceImpl personaService;
+    
+    @Operation(summary = "Se obtiene la lista de Personas")
     @GetMapping("/listar")
-    public ResponseEntity<List<Usuario>> listaUsuarios() {
-        return new ResponseEntity<>(usuarioService.findByAll(), HttpStatus.OK);
+    public ResponseEntity<List<Persona>> listaPersonas() {
+        return new ResponseEntity<>(personaService.findByAll(), HttpStatus.OK);
     }
 
-    @Operation(summary = "Debe enviar los campos del Usuario")
+    @Operation(summary = "Debe enviar los campos del Personas")
     @PostMapping("/crear")
-    public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario u) {
-        return new ResponseEntity<>(usuarioService.save(u), HttpStatus.CREATED);
+    public ResponseEntity<Persona> crearPersona(@RequestBody Persona u) {
+        return new ResponseEntity<>(personaService.save(u), HttpStatus.CREATED);
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Integer id, @RequestBody Usuario u) {
-        Usuario usuario = usuarioService.findById(id);
-        if (usuario != null) {
+    public ResponseEntity<Persona> actualizarPersona(@PathVariable Integer id, @RequestBody Persona u) {
+        Persona persona = personaService.findById(id);
+        if (persona != null) {
             try {
-                usuario.setNombre(u.getNombre());
-                usuario.setClave(u.getClave());
-                usuario.setEstado(u.getEstado());
-                usuario.setEmail(u.getEmail());
-                usuario.setPersona(u.getPersona());
-                usuario.setRol(u.getRol());
-                return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);
+                persona.setNombre(u.getNombre());
+                persona.setApellido(u.getApellido());
+                persona.setCedula(u.getCedula());
+                persona.setCorreo(u.getCorreo());
+                persona.setDireccion(u.getDireccion());
+                return new ResponseEntity<>(personaService.save(persona), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
@@ -64,9 +60,8 @@ public class UsuarioController {
         }
     }
 
-    public ResponseEntity<Usuario> elimiarUsuario(@PathVariable Integer id) {
-        usuarioService.delete(id);
+    public ResponseEntity<Persona> elimiarPersona(@PathVariable Integer id) {
+        personaService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }

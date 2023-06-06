@@ -4,9 +4,7 @@
  */
 package com.tendencias.m5b.proyectousuario.repositorio;
 
-
-
-import com.tendencias.m5b.proyectousuario.model.Usuario;
+import com.tendencias.m5b.proyectousuario.model.Persona;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,7 +12,7 @@ import org.springframework.data.jpa.repository.Query;
  *
  * @author lilis
  */
-public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
-        @Query(value = "Select * from usuario u where u.nombre = :nombre", nativeQuery = true)
-    public Usuario buscarUsuario(String nombre);
+public interface PersonaRepository extends JpaRepository<Persona, Integer> {
+     @Query(value = "Select * from persona u where u.nombre = :nombre", nativeQuery = true)
+    public Persona buscarPersona(String nombre);
 }
